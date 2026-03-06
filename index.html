@@ -13,28 +13,29 @@ body{
 
 .card{
   background: white;
-  padding: 15px;
-  border-radius: 12px;
-  max-width: 700px;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 95%;
   margin: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
 h2{
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: #333;
+  font-size: 22px;
 }
 
 table{
-  width:100%;
+  width: 100%;
   border-collapse: collapse;
 }
 
 th, td{
-  padding: 8px;
+  padding: 10px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 th{
@@ -42,20 +43,22 @@ th{
 }
 
 input{
-  width: 90%;
-  padding: 8px;
-  font-size: 16px;
+  width: 95%;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 button{
-  padding: 12px;
-  margin-top: 15px;
+  padding: 15px;
+  margin-top: 20px;
   width: 100%;
-  font-size: 16px;
+  font-size: 18px;
   background: #2c7be5;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -64,39 +67,42 @@ button:hover{
 }
 
 #result{
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
-/* Aesthetic message boxes */
+/* Result message cards */
 .ok{
   background: #d4edda;
   color: #155724;
-  padding: 10px 20px;
-  border-radius: 8px;
-  width: 60%;
+  padding: 14px 20px;
+  border-radius: 10px;
+  width: 90%;
   text-align: center;
   font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 18px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 .warn{
   background: #f8d7da;
   color: #721c24;
-  padding: 10px 20px;
-  border-radius: 8px;
-  width: 60%;
+  padding: 14px 20px;
+  border-radius: 10px;
+  width: 90%;
   text-align: center;
   font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 18px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 @media(max-width:600px){
-  th, td{font-size:12px;}
-  .ok, .warn{width: 90%;}
+  th, td{font-size:14px;}
+  input{font-size:16px;}
+  .ok, .warn{width: 95%; font-size:16px; padding:12px;}
 }
 </style>
 </head>
@@ -144,7 +150,6 @@ button:hover{
 </div>
 
 <script>
-// Evaluate difference vs invoice: (After - Before) - Invoice
 function evaluate(name,before,after,invoice){
   let delivered = after - before
   let diff = delivered - invoice
