@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuel Delivery Checker</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 15px;
+}
+
+.card{
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2{
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+table{
+  width:100%;
+  border-collapse: collapse;
+}
+
+th, td{
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+th{
+  background: #e9eef5;
+}
+
+input{
+  width: 90%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+button{
+  padding: 12px;
+  margin-top: 15px;
+  width: 100%;
+  font-size: 16px;
+  background: #2c7be5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover{
+  background: #1a5fc1;
+}
+
+#result{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Aesthetic message boxes */
+.ok{
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 60%;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.warn{
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 60%;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@media(max-width:600px){
+  th, td{font-size:12px;}
+  .ok, .warn{width: 90%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Fuel Delivery Checker</h2>
+
+<table>
+<tr>
+<th>Product</th>
+<th>Before</th>
+<th>After</th>
+<th>Invoice</th>
+</tr>
+
+<tr>
+<td>Regular</td>
+<td><input id="r_before"></td>
+<td><input id="r_after"></td>
+<td><input id="r_invoice"></td>
+</tr>
+
+<tr>
+<td>Premium</td>
+<td><input id="p_before"></td>
+<td><input id="p_after"></td>
+<td><input id="p_invoice"></td>
+</tr>
+
+<tr>
+<td>Diesel</td>
+<td><input id="d_before"></td>
+<td><input id="d_after"></td>
+<td><input id="d_invoice"></td>
+</tr>
+</table>
+
+<button onclick="check()">Check Delivery</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+// Evaluate difference vs invoice: (After - Before) - Invoice
+function evaluate(name,before,after,invoice){
+  let delivered = after - before
+  let diff = delivered - invoice
+  let absDiff = Math.abs(diff)
+
+  if(absDiff <= 700){
+      return `<div class="ok">${name}: Difference ${diff} L ✔️</div>`
+  }else{
+      return `<div class="warn">${name}: Difference ${diff} L ⚠️</div>`
+  }
+}
+
+function check(){
+  let r_before_v = +r_before.value
+  let r_after_v = +r_after.value
+  let r_invoice_v = +r_invoice.value
+
+  let p_before_v = +p_before.value
+  let p_after_v = +p_after.value
+  let p_invoice_v = +p_invoice.value
+
+  let d_before_v = +d_before.value
+  let d_after_v = +d_after.value
+  let d_invoice_v = +d_invoice.value
+
+  let html=""
+  html += evaluate("Regular",r_before_v,r_after_v,r_invoice_v)
+  html += evaluate("Premium",p_before_v,p_after_v,p_invoice_v)
+  html += evaluate("Diesel",d_before_v,d_after_v,d_invoice_v)
+
+  result.innerHTML = html
+}
+</script>
+
+</body>
+</html>
