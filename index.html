@@ -155,10 +155,20 @@ function evaluate(name,before,after,invoice){
 
   let delivered = after - before
   let diff = delivered - invoice
+  let absdelivered = Math.abs(delivered)
   let absDiff = Math.abs(diff)
 
    if(invoice === 0){
+     if(after >= before + 1000){
+      return `<div class="warn">${name}: Not Delivered But Over | Difference ${diff} L ⚠️</div>`
+      
+     }else if (after < before && after <= 1000) {
+    return `<div class="warn">${name}: Gas is Low ⚠️</div>`;
+      }
+     else{
+      
     return `<div class="ok">${name}: Not Delivered |  Difference ${diff} L </div>`
+       }
   }
 
   if(absDiff <= 700){
