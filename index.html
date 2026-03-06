@@ -151,19 +151,14 @@ button:hover{
 
 <script>
 function evaluate(name,before,after,invoice){
-  
-  if(invoice === 0){
-    return `<div class="ok">${name}: Not Delivered ⛽</div>`
-  }
-
   let delivered = after - before
   let diff = delivered - invoice
   let absDiff = Math.abs(diff)
 
   if(absDiff <= 700){
-      return `<div class="ok">${name}: Delivered | Difference ${diff} L ✔️</div>`
+      return `<div class="ok">${name}: Difference ${diff} L ✔️</div>`
   }else{
-      return `<div class="warn">${name}: Delivered | Difference ${diff} L ⚠️</div>`
+      return `<div class="warn">${name}: Difference ${diff} L ⚠️</div>`
   }
 }
 
